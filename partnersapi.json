@@ -1,0 +1,1038 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Firsty Partners API",
+    "contact": {
+      "name": "Support",
+      "email": "support@firsty.app"
+    },
+    "version": "1.1"
+  },
+  "servers": [
+    {
+      "url": "https://backoffice.test.firsty.app/api/v1",
+      "description": "Firsty Test Server"
+    },
+    {
+      "url": "https://backoffice.firsty.app/api/v1",
+      "description": "Firsty Production Server"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Partner Main"
+    },
+    {
+      "name": "Partner Users"
+    },
+    {
+      "name": "Partner Subscriptions"
+    }
+  ],
+  "paths": {
+    "/partners/auth/token": {
+      "get": {
+        "tags": [
+          "Partner Main"
+        ],
+        "summary": "Auth Token",
+        "description": "Returns Bearer Token for the Firsty Partner",
+        "operationId": "AuthToken",
+        "parameters": [
+          {
+            "name": "client-id",
+            "in": "header",
+            "description": "Identifier for the Firsty Partner",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "{{partnerClientId}}"
+            }
+          },
+          {
+            "name": "client-secret",
+            "in": "header",
+            "description": "Password for the Firsty Partner",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "{{partnerClientSecret}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the auth token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client id and client secret must be provided in headers"
+          },
+          "404": {
+            "description": "Partner not found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/partners/{partnerClientId}": {
+      "get": {
+        "tags": [
+          "Partner Main"
+        ],
+        "summary": "Partner Information",
+        "description": "Returns basic information about the Partner",
+        "operationId": "PartnerInformation",
+        "parameters": [
+          {
+            "name": "partnerClientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerInformationResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Partner not found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/partners/{partnerClientId}/users": {
+      "get": {
+        "tags": [
+          "Partner Users"
+        ],
+        "summary": "List Partner Users",
+        "description": "Returns all users of the Partner",
+        "operationId": "ListUsers",
+        "parameters": [
+          {
+            "name": "partnerClientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListUsersResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No user found"
+          },
+          "404": {
+            "description": "Partner not found"
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Partner Users"
+        ],
+        "summary": "Create New Partner User",
+        "description": "Creates a new user for the Partner",
+        "operationId": "NewUser",
+        "parameters": [
+          {
+            "name": "partnerClientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "In Pilot phase, you are limited to 3 users"
+          },
+          "404": {
+            "description": "Partner not found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/partners/{partnerClientId}/users/{partnerUserIccId}": {
+      "get": {
+        "tags": [
+          "Partner Users"
+        ],
+        "summary": "User Information",
+        "description": "Returns information about the Partner User",
+        "operationId": "UserInformation",
+        "parameters": [
+          {
+            "name": "partnerUserIccId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "partnerClientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInformationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User not found"
+          },
+          "404": {
+            "description": "Partner not found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/partners/{partnerClientId}/users/{partnerUserIccId}/usage": {
+      "get": {
+        "tags": [
+          "Partner Users"
+        ],
+        "summary": "Usage Information",
+        "description": "Returns daily usage information of the Partner User",
+        "operationId": "UsageInformation",
+        "parameters": [
+          {
+            "name": "partnerUserIccId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "partnerClientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserUsageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No user or active subscription found"
+          },
+          "404": {
+            "description": "Partner not found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/partners/{partnerClientId}/users/subscription": {
+      "post": {
+        "tags": [
+          "Partner Users"
+        ],
+        "summary": "New Partner User with a Subscription",
+        "description": "Creates a new Firsty User with a Subscription",
+        "operationId": "NewPartnerUserWithSubscription",
+        "parameters": [
+          {
+            "name": "partnerClientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/partnerClientId_partnerUserIccId_body"
+              },
+              "example": {
+                "subscriptionType": "",
+                "subscriptionCountries": "",
+                "subscriptionDuration": "",
+                "activationType": ""
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Partner not found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/partners/{partnerClientId}/users/{partnerUserIccId}/subscriptions": {
+      "get": {
+        "tags": [
+          "Partner Subscriptions"
+        ],
+        "summary": "List Partner User Subscriptions",
+        "description": "Lists First Subscriptions given to the Partner User",
+        "operationId": "ListPartnerUserSubscriptions",
+        "parameters": [
+          {
+            "name": "partnerUserIccId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "partnerClientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SubscriptionResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No user found"
+          },
+          "404": {
+            "description": "Partner not found"
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Partner Subscriptions"
+        ],
+        "summary": "New Partner User Subscription",
+        "description": "Creates a new Firsty Subscription for the Partner User",
+        "operationId": "NewPartnerUserSubscription",
+        "parameters": [
+          {
+            "name": "partnerUserIccId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "partnerClientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/partnerClientId_partnerUserIccId_body"
+              },
+              "example": {
+                "subscriptionType": "",
+                "subscriptionCountries": "",
+                "subscriptionDuration": "",
+                "activationType": ""
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No user found or invalid input"
+          },
+          "404": {
+            "description": "Partner not found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/partners/{partnerClientId}/users/{partnerUserIccId}/subscriptions/{transactionId}/activate": {
+      "patch": {
+        "tags": [
+          "Partner Subscriptions"
+        ],
+        "summary": "Activate Partner User Subscription",
+        "description": "Activates Firsty Subscription for the Partner User",
+        "operationId": "ActivatePartnerUserSubscription",
+        "parameters": [
+          {
+            "name": "partnerUserIccId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "partnerClientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No user or subscription found"
+          },
+          "404": {
+            "description": "Partner not found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/partners/{partnerClientId}/users/{partnerUserIccId}/subscriptions/{transactionId}/boost": {
+      "patch": {
+        "tags": [
+          "Partner Subscriptions"
+        ],
+        "summary": "Boost Partner User Subscription",
+        "description": "Gives a daily Boost for the Firsty Subscription of the Partner User",
+        "operationId": "BoostPartnerUserSubscriptionCopy",
+        "parameters": [
+          {
+            "name": "partnerUserIccId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "partnerClientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No user or active subscription found"
+          },
+          "404": {
+            "description": "Partner not found"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PartnerInformationResponse": {
+        "title": "PartnerInformationResponse",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "acrhzcdfgmi1e"
+            }
+          },
+          "clientId": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "hm8woyvu1u33h"
+            }
+          },
+          "link": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "06znd2c0h6lz2"
+            }
+          },
+          "settings": {
+            "$ref": "#/components/schemas/PartnerInformationResponse_settings"
+          }
+        }
+      },
+      "NewUserResponse": {
+        "title": "NewUserResponse",
+        "type": "object",
+        "properties": {
+          "iccId": {
+            "type": "string"
+          },
+          "activationCode": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "x4jqorfhgtx4a"
+            }
+          },
+          "qrCode": {
+            "type": "string",
+            "format": "byte",
+            "x-stoplight": {
+              "id": "jjwjftrg6046v"
+            }
+          }
+        }
+      },
+      "ListUsersResponse": {
+        "title": "ListUsersResponse",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ListUsersResponse_inner"
+        }
+      },
+      "UserInformationResponse": {
+        "title": "UserInformationResponse",
+        "type": "object",
+        "properties": {
+          "iccId": {
+            "type": "string"
+          },
+          "activationCode": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "za04hho110o8y"
+            }
+          },
+          "qrCode": {
+            "type": "string",
+            "format": "byte",
+            "x-stoplight": {
+              "id": "zafizfimow5px"
+            }
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date",
+            "x-stoplight": {
+              "id": "7jlc0ai0qf5i7"
+            }
+          },
+          "esimStatus": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "3o8g7xc3gac5r"
+            }
+          },
+          "installationStatus": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "8aets35jmjtjk"
+            }
+          }
+        }
+      },
+      "UserUsageResponse": {
+        "title": "UserUsageResponse",
+        "type": "object",
+        "properties": {
+          "iccId": {
+            "type": "string"
+          },
+          "esimStatus": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "3xekpozw0zs09"
+            }
+          },
+          "installationStatus": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "iz9dswjf58ipl"
+            }
+          },
+          "subscriptionType": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "dmta7lp602pmw"
+            }
+          },
+          "consumptionToday": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "3qtyeyzsmuwmc"
+            }
+          },
+          "countries": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-stoplight": {
+                "id": "n4sj9cpebbnck"
+              }
+            },
+            "x-stoplight": {
+              "id": "wsxkdhszztd3u"
+            }
+          }
+        }
+      },
+      "SubscriptionResponse": {
+        "title": "SubscriptionResponse",
+        "required": [
+          "allowance",
+          "countries",
+          "creationDate",
+          "iccId",
+          "status",
+          "subscriptionType",
+          "transactionId"
+        ],
+        "type": "object",
+        "properties": {
+          "iccId": {
+            "type": "string"
+          },
+          "transactionId": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "xd90h3girxh88"
+            }
+          },
+          "subscriptionType": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "znrsnfzbzluqa"
+            }
+          },
+          "status": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "wyfalwq5575w2"
+            }
+          },
+          "countries": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-stoplight": {
+                "id": "dxhw87lsdlcz6"
+              }
+            },
+            "x-stoplight": {
+              "id": "0mtdxytgr137t"
+            }
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date",
+            "x-stoplight": {
+              "id": "w7olgb1orovki"
+            }
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "x-stoplight": {
+              "id": "ny3mnz7x3fh9q"
+            }
+          },
+          "allowance": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "x2gd6mhe64r3b"
+            }
+          },
+          "numberOfDays": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "k9zye4unj9nt5"
+            }
+          },
+          "isThrottled": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "hdkx1asv6h57h"
+            }
+          },
+          "usageForTheDay": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "yn1n1b9j86g15"
+            }
+          },
+          "networkConnection": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "5z6swhxt60we2"
+            }
+          }
+        }
+      },
+      "NewSubscriptionRequest": {
+        "title": "NewSubscriptionRequest",
+        "required": [
+          "activationType",
+          "subscriptionCountries",
+          "subscriptionDuration",
+          "subscriptionType"
+        ],
+        "type": "object",
+        "properties": {
+          "subscriptionType": {
+            "type": "string"
+          },
+          "subscriptionCountries": {
+            "type": "array",
+            "items": {}
+          },
+          "subscriptionDuration": {
+            "type": "number"
+          },
+          "activationType": {
+            "type": "string",
+            "description": "Can be of three types:\n- IMMEDIATE: Subscription is immediately active\n- AUTOMATIC: Subscription is automatically activated once the eSIM is installed\n- MANUAL: Subscription is to activated with API call"
+          }
+        },
+        "example": {
+          "subscriptionType": "Comfort Plus",
+          "subscriptionCountries": "['NL']",
+          "subscriptionDuration": 10,
+          "activationType": "IMMEDIATE"
+        },
+        "x-examples": {
+          "Example 1": {
+            "subscriptionType": "Comfort Plus",
+            "subscriptionCountries": [
+              "NL"
+            ],
+            "subscriptionDuration": 10,
+            "activationType": "IMMEDIATE"
+          },
+          "Example 2": {
+            "subscriptionType": "First Class",
+            "subscriptionCountries": [
+              "NL",
+              "TR"
+            ],
+            "subscriptionDuration": 1,
+            "activationType": "AUTOMATIC"
+          },
+          "Example 3": {
+            "subscriptionType": "Comfort Plus",
+            "subscriptionCountries": [
+              "global"
+            ],
+            "subscriptionDuration": 30,
+            "activationType": "MANUAL"
+          }
+        }
+      },
+      "inline_response_200": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "1w2fc472x06a2"
+            }
+          }
+        }
+      },
+      "partnerClientId_partnerUserIccId_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NewSubscriptionRequest"
+          },
+          {
+            "example": {
+              "subscriptionType": "",
+              "subscriptionCountries": "",
+              "subscriptionDuration": "",
+              "activationType": ""
+            }
+          }
+        ]
+      },
+      "PartnerInformationResponse_settings_emailSettings": {
+        "type": "object",
+        "properties": {
+          "allowAllFromDomain": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "415gj8jghmzc0"
+            }
+          },
+          "allowDomainRegsitraion": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "35y322l8zaqmy"
+            }
+          }
+        }
+      },
+      "PartnerInformationResponse_settings": {
+        "type": "object",
+        "properties": {
+          "isPriceVisible": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "g09wx7me932mn"
+            }
+          },
+          "isAddPromoVisible": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "qsb51f4uf6a6a"
+            }
+          },
+          "isGlobalPlanOnly": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "dzr9s244apqis"
+            }
+          },
+          "isPartnerDynamicLinkOneTimeUse": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "8zjfzaqwpyfrp"
+            }
+          },
+          "canSendPromotionalOneDay": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "2xb3cqkrcezgv"
+            }
+          },
+          "emailSettings": {
+            "$ref": "#/components/schemas/PartnerInformationResponse_settings_emailSettings"
+          }
+        }
+      },
+      "ListUsersResponse_inner": {
+        "type": "object",
+        "properties": {
+          "iccId": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "zn0lev9zo6sq5"
+            }
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date",
+            "x-stoplight": {
+              "id": "43tmk0yz885v1"
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "4xrr2s52mceig"
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
