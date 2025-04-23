@@ -1,0 +1,162 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Firsty API",
+      "description": "API for retrieving plan information from Firsty",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://backoffice.firsty.app/api",
+        "description": "Production server"
+      }
+    ],
+    "paths": {
+      "/distributor/affiliate/country/{countryCode}/days/{days}": {
+        "get": {
+          "summary": "Get plan information by country and days",
+          "description": "Retrieves plan information for a specific country and number of days",
+          "parameters": [
+            {
+              "name": "countryCode",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "Two-letter country code (e.g., TR for Turkey)",
+              "example": "TR"
+            },
+            {
+              "name": "days",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "description": "Number of days for the plan",
+              "example": 1
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "planName": {
+                              "type": "string",
+                              "example": "Firsty Comfort+ (TR) - 1 Day"
+                            },
+                            "coverages": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "code": {
+                                    "type": "string",
+                                    "example": "TR"
+                                  }
+                                }
+                              }
+                            },
+                            "prices": {
+                              "type": "object",
+                              "properties": {
+                                "EUR": {
+                                  "type": "number",
+                                  "format": "float",
+                                  "example": 1.7
+                                },
+                                "canTopUp": {
+                                  "type": "boolean",
+                                  "example": true
+                                },
+                                "hasAds": {
+                                  "type": "boolean",
+                                  "example": false
+                                },
+                                "dataUnit": {
+                                  "type": "string",
+                                  "example": "MB"
+                                },
+                                "maxSpeed": {
+                                  "type": "string",
+                                  "example": "512 Kbps"
+                                },
+                                "reductionLimit": {
+                                  "type": "integer",
+                                  "example": 5000
+                                },
+                                "reducedSpeed": {
+                                  "type": ["string", "null"],
+                                  "example": null
+                                },
+                                "throttleLimit": {
+                                  "type": ["string", "null"],
+                                  "example": null
+                                },
+                                "throttleSpeed": {
+                                  "type": ["string", "null"],
+                                  "example": null
+                                },
+                                "webUrl": {
+                                  "type": "string",
+                                  "example": "https://www.firsty.app/turkey-esim"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "data": [
+                      {
+                        "planName": "Firsty Comfort+ (TR) - 1 Day",
+                        "coverages": [
+                          {
+                            "code": "TR"
+                          }
+                        ],
+                        "prices": {
+                          "EUR": 1.7,
+                          "canTopUp": true,
+                          "hasAds": false,
+                          "dataUnit": "MB",
+                          "maxSpeed": "512 Kbps",
+                          "reductionLimit": 5000,
+                          "reducedSpeed": null,
+                          "throttleLimit": null,
+                          "throttleSpeed": null,
+                          "webUrl": "https://www.firsty.app/turkey-esim"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "404": {
+              "description": "Country or plan not found"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      }
+    }
+  }
