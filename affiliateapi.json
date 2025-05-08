@@ -1,162 +1,341 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "Firsty API",
-      "description": "API for retrieving plan information from Firsty",
-      "version": "1.0.0"
-    },
-    "servers": [
-      {
-        "url": "https://backoffice.firsty.app/api",
-        "description": "Production server"
-      }
-    ],
-    "paths": {
-      "/distributor/affiliate/country/{countryCode}/days/{days}": {
-        "get": {
-          "summary": "Get plan information by country and days",
-          "description": "Retrieves plan information for a specific country and number of days",
-          "parameters": [
-            {
-              "name": "countryCode",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string"
-              },
-              "description": "Two-letter country code (e.g., TR for Turkey)",
-              "example": "TR"
-            },
-            {
-              "name": "days",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "integer",
-                "minimum": 1
-              },
-              "description": "Number of days for the plan",
-              "example": 1
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "data": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "planName": {
-                              "type": "string",
-                              "example": "Firsty Comfort+ (TR) - 1 Day"
-                            },
-                            "coverages": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "code": {
-                                    "type": "string",
-                                    "example": "TR"
-                                  }
-                                }
-                              }
-                            },
-                            "prices": {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Firsty API",
+    "description": "API for retrieving plan information from Firsty",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://backoffice.firsty.app/api",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/distributor/affiliate/full": {
+      "get": {
+        "summary": "Get all plans for all countries and days",
+        "description": "Retrieves the complete list of plans for all available countries and day options",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "planName": {
+                            "type": "string",
+                            "example": "Firsty Comfort+ (CH) - 1 Day"
+                          },
+                          "coverages": {
+                            "type": "array",
+                            "items": {
                               "type": "object",
                               "properties": {
-                                "EUR": {
-                                  "type": "number",
-                                  "format": "float",
-                                  "example": 1.7
-                                },
-                                "canTopUp": {
-                                  "type": "boolean",
-                                  "example": true
-                                },
-                                "hasAds": {
-                                  "type": "boolean",
-                                  "example": false
-                                },
-                                "dataUnit": {
+                                "code": {
                                   "type": "string",
-                                  "example": "MB"
-                                },
-                                "maxSpeed": {
-                                  "type": "string",
-                                  "example": "512 Kbps"
-                                },
-                                "reductionLimit": {
-                                  "type": "integer",
-                                  "example": 5000
-                                },
-                                "reducedSpeed": {
-                                  "type": ["string", "null"],
-                                  "example": null
-                                },
-                                "throttleLimit": {
-                                  "type": ["string", "null"],
-                                  "example": null
-                                },
-                                "throttleSpeed": {
-                                  "type": ["string", "null"],
-                                  "example": null
-                                },
-                                "webUrl": {
-                                  "type": "string",
-                                  "example": "https://www.firsty.app/turkey-esim"
+                                  "example": "CH"
                                 }
                               }
                             }
+                          },
+                          "prices": {
+                            "type": "object",
+                            "properties": {
+                              "EUR": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 1.7
+                              }
+                            }
+                          },
+                          "canTopUp": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "hasAds": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "dataUnit": {
+                            "type": "string",
+                            "example": "MB"
+                          },
+                          "maxSpeed": {
+                            "type": "string",
+                            "example": "5 Mbps"
+                          },
+                          "reductionLimit": {
+                            "type": "integer",
+                            "example": 500
+                          },
+                          "reducedSpeed": {
+                            "type": "string",
+                            "example": "1 Mbps"
+                          },
+                          "throttleLimit": {
+                            "type": "integer",
+                            "example": 1000
+                          },
+                          "throttleSpeed": {
+                            "type": "string",
+                            "example": "512 Kbps"
+                          },
+                          "website": {
+                            "type": "string",
+                            "example": "https://www.firsty.app/switzerland-esim"
+                          },
+                          "description": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": [
+                              "500Mb at 5 Mbps, then 1Gb at 1 Mbps, then unlimited at 512 Kbps",
+                              "Flexibility to purchase anywhere from 1 to 30 days. Plan shown is starting price for 1 day, the more days purchased the lower the daily rate becomes.",
+                              "Days never expire. Leftover days can always be reused during a next trip in any other country. You can simply pause the days and activate them later.",
+                              "Validity Period starts when the user activates the plan."
+                            ]
                           }
                         }
                       }
                     }
-                  },
-                  "example": {
-                    "data": [
-                      {
-                        "planName": "Firsty Comfort+ (TR) - 1 Day",
-                        "coverages": [
-                          {
-                            "code": "TR"
-                          }
-                        ],
-                        "prices": {
-                          "EUR": 1.7,
-                          "canTopUp": true,
-                          "hasAds": false,
-                          "dataUnit": "MB",
-                          "maxSpeed": "512 Kbps",
-                          "reductionLimit": 5000,
-                          "reducedSpeed": null,
-                          "throttleLimit": null,
-                          "throttleSpeed": null,
-                          "webUrl": "https://www.firsty.app/turkey-esim"
-                        }
-                      }
-                    ]
                   }
+                },
+                "example": {
+                  "data": [
+                    {
+                      "planName": "Firsty Comfort+ (CH) - 1 Day",
+                      "coverages": [
+                        {
+                          "code": "CH"
+                        }
+                      ],
+                      "prices": {
+                        "EUR": 1.7
+                      },
+                      "canTopUp": true,
+                      "hasAds": false,
+                      "dataUnit": "MB",
+                      "maxSpeed": "5 Mbps",
+                      "reductionLimit": 500,
+                      "reducedSpeed": "1 Mbps",
+                      "throttleLimit": 1000,
+                      "throttleSpeed": "512 Kbps",
+                      "website": "https://www.firsty.app/switzerland-esim",
+                      "description": [
+                        "500Mb at 5 Mbps, then 1Gb at 1 Mbps, then unlimited at 512 Kbps",
+                        "Flexibility to purchase anywhere from 1 to 30 days. Plan shown is starting price for 1 day, the more days purchased the lower the daily rate becomes.",
+                        "Days never expire. Leftover days can always be reused during a next trip in any other country. You can simply pause the days and activate them later.",
+                        "Validity Period starts when the user activates the plan."
+                      ]
+                    },
+                    {
+                      "planName": "Firsty Comfort+ (IT) - 7 Days",
+                      "coverages": [
+                        {
+                          "code": "IT"
+                        }
+                      ],
+                      "prices": {
+                        "EUR": 4.5
+                      },
+                      "canTopUp": true,
+                      "hasAds": false,
+                      "dataUnit": "MB",
+                      "maxSpeed": "5 Mbps",
+                      "reductionLimit": 500,
+                      "reducedSpeed": "1 Mbps",
+                      "throttleLimit": 1000,
+                      "throttleSpeed": "512 Kbps",
+                      "website": "https://www.firsty.app/italy-esim",
+                      "description": [
+                        "500Mb at 5 Mbps, then 1Gb at 1 Mbps, then unlimited at 512 Kbps",
+                        "Flexibility to purchase anywhere from 1 to 30 days. Plan shown is starting price for 7 days.",
+                        "Days never expire. Leftover days can always be reused during a next trip in any other country.",
+                        "Validity Period starts when the user activates the plan."
+                      ]
+                    }
+                  ]
                 }
               }
-            },
-            "400": {
-              "description": "Bad request"
-            },
-            "404": {
-              "description": "Country or plan not found"
-            },
-            "500": {
-              "description": "Internal server error"
             }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/distributor/affiliate/country/{countryCode}/days/{days}": {
+      "get": {
+        "summary": "Get plan information by country and days",
+        "description": "Retrieves plan information for a specific country and number of days",
+        "parameters": [
+          {
+            "name": "countryCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Two-letter country code (e.g., TR for Turkey)",
+            "example": "TR"
+          },
+          {
+            "name": "days",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Number of days for the plan",
+            "example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "planName": {
+                            "type": "string",
+                            "example": "Firsty Comfort+ (CH) - 1 Day"
+                          },
+                          "coverages": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "code": {
+                                  "type": "string",
+                                  "example": "CH"
+                                }
+                              }
+                            }
+                          },
+                          "prices": {
+                            "type": "object",
+                            "properties": {
+                              "EUR": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 1.7
+                              }
+                            }
+                          },
+                          "canTopUp": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "hasAds": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "dataUnit": {
+                            "type": "string",
+                            "example": "MB"
+                          },
+                          "maxSpeed": {
+                            "type": "string",
+                            "example": "5 Mbps"
+                          },
+                          "reductionLimit": {
+                            "type": "integer",
+                            "example": 500
+                          },
+                          "reducedSpeed": {
+                            "type": "string",
+                            "example": "1 Mbps"
+                          },
+                          "throttleLimit": {
+                            "type": "integer",
+                            "example": 1000
+                          },
+                          "throttleSpeed": {
+                            "type": "string",
+                            "example": "512 Kbps"
+                          },
+                          "website": {
+                            "type": "string",
+                            "example": "https://www.firsty.app/switzerland-esim"
+                          },
+                          "description": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": [
+                              "500Mb at 5 Mbps, then 1Gb at 1 Mbps, then unlimited at 512 Kbps",
+                              "Flexibility to purchase anywhere from 1 to 30 days. Plan shown is starting price for 1 day, the more days purchased the lower the daily rate becomes.",
+                              "Days never expire. Leftover days can always be reused during a next trip in any other country. You can simply pause the days and activate them later.",
+                              "Validity Period starts when the user activates the plan."
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "data": [
+                    {
+                      "planName": "Firsty Comfort+ (CH) - 1 Day",
+                      "coverages": [
+                        {
+                          "code": "CH"
+                        }
+                      ],
+                      "prices": {
+                        "EUR": 1.7
+                      },
+                      "canTopUp": true,
+                      "hasAds": false,
+                      "dataUnit": "MB",
+                      "maxSpeed": "5 Mbps",
+                      "reductionLimit": 500,
+                      "reducedSpeed": "1 Mbps",
+                      "throttleLimit": 1000,
+                      "throttleSpeed": "512 Kbps",
+                      "website": "https://www.firsty.app/switzerland-esim",
+                      "description": [
+                        "500Mb at 5 Mbps, then 1Gb at 1 Mbps, then unlimited at 512 Kbps",
+                        "Flexibility to purchase anywhere from 1 to 30 days. Plan shown is starting price for 1 day, the more days purchased the lower the daily rate becomes.",
+                        "Days never expire. Leftover days can always be reused during a next trip in any other country. You can simply pause the days and activate them later.",
+                        "Validity Period starts when the user activates the plan."
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Country or plan not found"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
     }
   }
+}
