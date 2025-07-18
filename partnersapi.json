@@ -75,7 +75,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_200"
+                  "$ref": "#/components/schemas/AuthTokenResponse"
                 }
               }
             }
@@ -102,7 +102,7 @@
           {
             "name": "partnerClientId",
             "in": "path",
-            "description": "",
+            "description": "The partner client identifier",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -113,7 +113,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Partner information retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -141,7 +141,7 @@
           {
             "name": "partnerClientId",
             "in": "path",
-            "description": "",
+            "description": "The partner client identifier",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -152,7 +152,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "List of partner users retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -181,7 +181,7 @@
           {
             "name": "partnerClientId",
             "in": "path",
-            "description": "",
+            "description": "The partner client identifier",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -190,9 +190,20 @@
             }
           }
         ],
+        "requestBody": {
+          "description": "User creation request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUserRequest"
+              }
+            }
+          },
+          "required": false
+        },
         "responses": {
           "200": {
-            "description": "",
+            "description": "User created successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -221,9 +232,9 @@
         "operationId": "UserInformation",
         "parameters": [
           {
-            "name": "partnerUserIccId",
+            "name": "partnerClientId",
             "in": "path",
-            "description": "",
+            "description": "The partner client identifier",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -232,9 +243,9 @@
             }
           },
           {
-            "name": "partnerClientId",
+            "name": "partnerUserIccId",
             "in": "path",
-            "description": "",
+            "description": "The user ICC ID",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -245,7 +256,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "User information retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -274,9 +285,9 @@
         "operationId": "UsageInformation",
         "parameters": [
           {
-            "name": "partnerUserIccId",
+            "name": "partnerClientId",
             "in": "path",
-            "description": "",
+            "description": "The partner client identifier",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -285,9 +296,9 @@
             }
           },
           {
-            "name": "partnerClientId",
+            "name": "partnerUserIccId",
             "in": "path",
-            "description": "",
+            "description": "The user ICC ID",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -298,7 +309,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Usage information retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -329,7 +340,7 @@
           {
             "name": "partnerClientId",
             "in": "path",
-            "description": "",
+            "description": "The partner client identifier",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -339,17 +350,11 @@
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Subscription creation request",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/partnerClientId_partnerUserIccId_body"
-              },
-              "example": {
-                "subscriptionType": "",
-                "subscriptionCountries": "",
-                "subscriptionDuration": "",
-                "activationType": ""
+                "$ref": "#/components/schemas/NewSubscriptionRequest"
               }
             }
           },
@@ -357,7 +362,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "User with subscription created successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -379,13 +384,13 @@
           "Partner Subscriptions"
         ],
         "summary": "List Partner User Subscriptions",
-        "description": "Lists First Subscriptions given to the Partner User",
+        "description": "Lists Firsty Subscriptions given to the Partner User",
         "operationId": "ListPartnerUserSubscriptions",
         "parameters": [
           {
-            "name": "partnerUserIccId",
+            "name": "partnerClientId",
             "in": "path",
-            "description": "",
+            "description": "The partner client identifier",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -394,9 +399,9 @@
             }
           },
           {
-            "name": "partnerClientId",
+            "name": "partnerUserIccId",
             "in": "path",
-            "description": "",
+            "description": "The user ICC ID",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -407,7 +412,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "List of subscriptions retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -437,9 +442,9 @@
         "operationId": "NewPartnerUserSubscription",
         "parameters": [
           {
-            "name": "partnerUserIccId",
+            "name": "partnerClientId",
             "in": "path",
-            "description": "",
+            "description": "The partner client identifier",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -448,9 +453,9 @@
             }
           },
           {
-            "name": "partnerClientId",
+            "name": "partnerUserIccId",
             "in": "path",
-            "description": "",
+            "description": "The user ICC ID",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -460,17 +465,11 @@
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Subscription creation request",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/partnerClientId_partnerUserIccId_body"
-              },
-              "example": {
-                "subscriptionType": "",
-                "subscriptionCountries": "",
-                "subscriptionDuration": "",
-                "activationType": ""
+                "$ref": "#/components/schemas/NewSubscriptionRequest"
               }
             }
           },
@@ -478,7 +477,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "Subscription created successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -507,9 +506,20 @@
         "operationId": "ActivatePartnerUserSubscription",
         "parameters": [
           {
+            "name": "partnerClientId",
+            "in": "path",
+            "description": "The partner client identifier",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "partnerUserIccId",
             "in": "path",
-            "description": "",
+            "description": "The user ICC ID",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -520,18 +530,7 @@
           {
             "name": "transactionId",
             "in": "path",
-            "description": "",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "partnerClientId",
-            "in": "path",
-            "description": "",
+            "description": "The transaction ID",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -542,7 +541,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Subscription activated successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -568,12 +567,23 @@
         ],
         "summary": "Boost Partner User Subscription",
         "description": "Gives a daily Boost for the Firsty Subscription of the Partner User",
-        "operationId": "BoostPartnerUserSubscriptionCopy",
+        "operationId": "BoostPartnerUserSubscription",
         "parameters": [
+          {
+            "name": "partnerClientId",
+            "in": "path",
+            "description": "The partner client identifier",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "partnerUserIccId",
             "in": "path",
-            "description": "",
+            "description": "The user ICC ID",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -584,18 +594,7 @@
           {
             "name": "transactionId",
             "in": "path",
-            "description": "",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "partnerClientId",
-            "in": "path",
-            "description": "",
+            "description": "The transaction ID",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -606,7 +605,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Subscription boosted successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -628,33 +627,95 @@
   },
   "components": {
     "schemas": {
+      "AuthTokenResponse": {
+        "title": "AuthTokenResponse",
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Bearer token for authentication"
+          }
+        },
+        "required": ["token"]
+      },
       "PartnerInformationResponse": {
         "title": "PartnerInformationResponse",
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "x-stoplight": {
-              "id": "acrhzcdfgmi1e"
-            }
+            "description": "Partner name"
           },
           "clientId": {
-            "type": "string"
+            "type": "string",
+            "description": "Partner client ID"
           },
           "code": {
             "type": "string",
-            "x-stoplight": {
-              "id": "hm8woyvu1u33h"
-            }
+            "description": "Partner code"
           },
           "link": {
             "type": "string",
-            "x-stoplight": {
-              "id": "06znd2c0h6lz2"
-            }
+            "description": "Partner link"
           },
           "settings": {
-            "$ref": "#/components/schemas/PartnerInformationResponse_settings"
+            "$ref": "#/components/schemas/PartnerSettings"
+          }
+        },
+        "required": ["name", "clientId", "code", "link", "settings"]
+      },
+      "PartnerSettings": {
+        "title": "PartnerSettings",
+        "type": "object",
+        "properties": {
+          "isPriceVisible": {
+            "type": "boolean",
+            "description": "Whether prices are visible"
+          },
+          "isAddPromoVisible": {
+            "type": "boolean",
+            "description": "Whether add promo is visible"
+          },
+          "isGlobalPlanOnly": {
+            "type": "boolean",
+            "description": "Whether only global plans are available"
+          },
+          "isPartnerDynamicLinkOneTimeUse": {
+            "type": "boolean",
+            "description": "Whether partner dynamic links are one-time use"
+          },
+          "canSendPromotionalOneDay": {
+            "type": "boolean",
+            "description": "Whether one-day promotional messages can be sent"
+          },
+          "emailSettings": {
+            "$ref": "#/components/schemas/EmailSettings"
+          }
+        },
+        "required": ["isPriceVisible", "isAddPromoVisible", "isGlobalPlanOnly", "isPartnerDynamicLinkOneTimeUse", "canSendPromotionalOneDay", "emailSettings"]
+      },
+      "EmailSettings": {
+        "title": "EmailSettings",
+        "type": "object",
+        "properties": {
+          "allowAllFromDomain": {
+            "type": "boolean",
+            "description": "Whether to allow all emails from domain"
+          },
+          "allowDomainRegistration": {
+            "type": "boolean",
+            "description": "Whether to allow domain registration"
+          }
+        },
+        "required": ["allowAllFromDomain", "allowDomainRegistration"]
+      },
+      "NewUserRequest": {
+        "title": "NewUserRequest",
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "string",
+            "description": "External identifier for the user"
           }
         }
       },
@@ -663,398 +724,240 @@
         "type": "object",
         "properties": {
           "iccId": {
-            "type": "string"
+            "type": "string",
+            "description": "ICC ID of the user"
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "description": "External identifier for the user"
           },
           "activationCode": {
             "type": "string",
-            "x-stoplight": {
-              "id": "x4jqorfhgtx4a"
-            }
+            "description": "Activation code for the user"
           },
           "qrCode": {
             "type": "string",
             "format": "byte",
-            "x-stoplight": {
-              "id": "jjwjftrg6046v"
-            }
+            "description": "QR code for activation"
           }
-        }
+        },
+        "required": ["iccId", "activationCode", "qrCode"]
       },
       "ListUsersResponse": {
         "title": "ListUsersResponse",
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/ListUsersResponse_inner"
+          "$ref": "#/components/schemas/UserSummary"
         }
+      },
+      "UserSummary": {
+        "title": "UserSummary",
+        "type": "object",
+        "properties": {
+          "iccId": {
+            "type": "string",
+            "description": "ICC ID of the user"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date",
+            "description": "User creation date"
+          }
+        },
+        "required": ["iccId", "creationDate"]
       },
       "UserInformationResponse": {
         "title": "UserInformationResponse",
         "type": "object",
         "properties": {
           "iccId": {
-            "type": "string"
+            "type": "string",
+            "description": "ICC ID of the user"
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "description": "External identifier for the user"
           },
           "activationCode": {
             "type": "string",
-            "x-stoplight": {
-              "id": "za04hho110o8y"
-            }
+            "description": "Activation code for the user"
           },
           "qrCode": {
             "type": "string",
             "format": "byte",
-            "x-stoplight": {
-              "id": "zafizfimow5px"
-            }
+            "description": "QR code for activation"
           },
           "creationDate": {
             "type": "string",
             "format": "date",
-            "x-stoplight": {
-              "id": "7jlc0ai0qf5i7"
-            }
+            "description": "User creation date"
           },
           "esimStatus": {
             "type": "string",
-            "x-stoplight": {
-              "id": "3o8g7xc3gac5r"
-            }
+            "description": "Current eSIM status"
           },
           "installationStatus": {
             "type": "string",
-            "x-stoplight": {
-              "id": "8aets35jmjtjk"
-            }
+            "description": "Installation status"
           }
-        }
+        },
+        "required": ["iccId", "activationCode", "qrCode", "creationDate", "esimStatus", "installationStatus"]
       },
       "UserUsageResponse": {
         "title": "UserUsageResponse",
         "type": "object",
         "properties": {
           "iccId": {
-            "type": "string"
+            "type": "string",
+            "description": "ICC ID of the user"
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "description": "External identifier for the user"
           },
           "esimStatus": {
             "type": "string",
-            "x-stoplight": {
-              "id": "3xekpozw0zs09"
-            }
+            "description": "Current eSIM status"
           },
           "installationStatus": {
             "type": "string",
-            "x-stoplight": {
-              "id": "iz9dswjf58ipl"
-            }
+            "description": "Installation status"
           },
           "subscriptionType": {
             "type": "string",
-            "x-stoplight": {
-              "id": "dmta7lp602pmw"
-            }
+            "description": "Type of subscription"
           },
           "consumptionToday": {
             "type": "string",
-            "x-stoplight": {
-              "id": "3qtyeyzsmuwmc"
-            }
+            "description": "Data consumption for today"
           },
           "countries": {
             "type": "array",
             "items": {
-              "type": "string",
-              "x-stoplight": {
-                "id": "n4sj9cpebbnck"
-              }
+              "type": "string"
             },
-            "x-stoplight": {
-              "id": "wsxkdhszztd3u"
-            }
+            "description": "List of countries covered"
           }
-        }
-      },
-      "SubscriptionResponse": {
-        "title": "SubscriptionResponse",
-        "required": [
-          "allowance",
-          "countries",
-          "creationDate",
-          "iccId",
-          "status",
-          "subscriptionType",
-          "transactionId"
-        ],
-        "type": "object",
-        "properties": {
-          "iccId": {
-            "type": "string"
-          },
-          "transactionRef": {
-            "type": "string"
-          },
-          "transactionId": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "xd90h3girxh88"
-            }
-          },
-          "subscriptionType": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "znrsnfzbzluqa"
-            }
-          },
-          "status": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "wyfalwq5575w2"
-            }
-          },
-          "countries": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "x-stoplight": {
-                "id": "dxhw87lsdlcz6"
-              }
-            },
-            "x-stoplight": {
-              "id": "0mtdxytgr137t"
-            }
-          },
-          "creationDate": {
-            "type": "string",
-            "format": "date",
-            "x-stoplight": {
-              "id": "w7olgb1orovki"
-            }
-          },
-          "endDate": {
-            "type": "string",
-            "format": "date",
-            "x-stoplight": {
-              "id": "ny3mnz7x3fh9q"
-            }
-          },
-          "allowance": {
-            "type": "number",
-            "x-stoplight": {
-              "id": "x2gd6mhe64r3b"
-            }
-          },
-          "numberOfDays": {
-            "type": "number",
-            "x-stoplight": {
-              "id": "k9zye4unj9nt5"
-            }
-          },
-          "isThrottled": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "hdkx1asv6h57h"
-            }
-          },
-          "usageForTheDay": {
-            "type": "number",
-            "x-stoplight": {
-              "id": "yn1n1b9j86g15"
-            }
-          },
-          "networkConnection": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "5z6swhxt60we2"
-            }
-          }
-        }
-      },
-      "NewUserRequest": {
-        "title": "NewUserRequest",
-        "required": [],
-        "type": "object",
-        "properties": {
-          "externalId": {
-            "type": "string"
-          }
-        }
+        },
+        "required": ["iccId", "esimStatus", "installationStatus", "subscriptionType", "consumptionToday", "countries"]
       },
       "NewSubscriptionRequest": {
         "title": "NewSubscriptionRequest",
-        "required": [
-          "activationType",
-          "subscriptionCountries",
-          "subscriptionDuration",
-          "subscriptionType"
-        ],
         "type": "object",
         "properties": {
           "subscriptionType": {
-            "type": "string"
+            "type": "string",
+            "description": "Type of subscription"
           },
           "subscriptionCountries": {
             "type": "array",
-            "items": {}
+            "items": {
+              "type": "string"
+            },
+            "description": "List of countries for the subscription"
           },
           "subscriptionDuration": {
-            "type": "number"
+            "type": "number",
+            "description": "Duration of subscription in days"
           },
           "activationType": {
             "type": "string",
-            "description": "Can be of three types:\n- IMMEDIATE: Subscription is immediately active\n- AUTOMATIC: Subscription is automatically activated once the eSIM is installed\n- MANUAL: Subscription is to activated with API call"
+            "description": "Activation type",
+            "enum": ["IMMEDIATE", "AUTOMATIC", "MANUAL"]
           },
           "transactionRef": {
-            "type": "string"
+            "type": "string",
+            "description": "Transaction reference"
           }
         },
-        "example": {
-          "subscriptionType": "Comfort Plus",
-          "subscriptionCountries": "['NL']",
-          "subscriptionDuration": 10,
-          "activationType": "IMMEDIATE",
-          "transactionRef": "1234567890"
-        },
-        "x-examples": {
-          "Example 1": {
+        "required": ["subscriptionType", "subscriptionCountries", "subscriptionDuration", "activationType"],
+        "examples": [
+          {
             "subscriptionType": "Comfort Plus",
-            "subscriptionCountries": [
-              "NL"
-            ],
+            "subscriptionCountries": ["NL"],
             "subscriptionDuration": 10,
             "activationType": "IMMEDIATE",
             "transactionRef": "1234567890"
           },
-          "Example 2": {
+          {
             "subscriptionType": "First Class",
-            "subscriptionCountries": [
-              "NL",
-              "TR"
-            ],
+            "subscriptionCountries": ["NL", "TR"],
             "subscriptionDuration": 1,
             "activationType": "AUTOMATIC",
             "transactionRef": "0987654321"
           },
-          "Example 3": {
+          {
             "subscriptionType": "Comfort Plus",
-            "subscriptionCountries": [
-              "global"
-            ],
+            "subscriptionCountries": ["global"],
             "subscriptionDuration": 30,
             "activationType": "MANUAL",
             "transactionRef": "1122334455"
           }
-        }
-      },
-      "inline_response_200": {
-        "type": "object",
-        "properties": {
-          "token": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "1w2fc472x06a2"
-            }
-          }
-        }
-      },
-      "partnerClientId_partnerUserIccId_body": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/NewSubscriptionRequest"
-          },
-          {
-            "example": {
-              "subscriptionType": "",
-              "subscriptionCountries": "",
-              "subscriptionDuration": "",
-              "activationType": "",
-              "transactionRef": ""
-            }
-          }
         ]
       },
-      "PartnerInformationResponse_settings_emailSettings": {
-        "type": "object",
-        "properties": {
-          "allowAllFromDomain": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "415gj8jghmzc0"
-            }
-          },
-          "allowDomainRegsitraion": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "35y322l8zaqmy"
-            }
-          }
-        }
-      },
-      "PartnerInformationResponse_settings": {
-        "type": "object",
-        "properties": {
-          "isPriceVisible": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "g09wx7me932mn"
-            }
-          },
-          "isAddPromoVisible": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "qsb51f4uf6a6a"
-            }
-          },
-          "isGlobalPlanOnly": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "dzr9s244apqis"
-            }
-          },
-          "isPartnerDynamicLinkOneTimeUse": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "8zjfzaqwpyfrp"
-            }
-          },
-          "canSendPromotionalOneDay": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "2xb3cqkrcezgv"
-            }
-          },
-          "emailSettings": {
-            "$ref": "#/components/schemas/PartnerInformationResponse_settings_emailSettings"
-          }
-        }
-      },
-      "ListUsersResponse_inner": {
+      "SubscriptionResponse": {
+        "title": "SubscriptionResponse",
         "type": "object",
         "properties": {
           "iccId": {
             "type": "string",
-            "x-stoplight": {
-              "id": "zn0lev9zo6sq5"
-            }
+            "description": "ICC ID of the user"
+          },
+          "transactionRef": {
+            "type": "string",
+            "description": "Transaction reference"
+          },
+          "transactionId": {
+            "type": "string",
+            "description": "Transaction ID"
+          },
+          "subscriptionType": {
+            "type": "string",
+            "description": "Type of subscription"
+          },
+          "status": {
+            "type": "string",
+            "description": "Subscription status"
+          },
+          "countries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of countries covered"
           },
           "creationDate": {
             "type": "string",
             "format": "date",
-            "x-stoplight": {
-              "id": "43tmk0yz885v1"
-            }
+            "description": "Subscription creation date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Subscription end date"
+          },
+          "allowance": {
+            "type": "number",
+            "description": "Data allowance"
+          },
+          "numberOfDays": {
+            "type": "number",
+            "description": "Number of days for the subscription"
+          },
+          "isThrottled": {
+            "type": "boolean",
+            "description": "Whether the subscription is throttled"
+          },
+          "usageForTheDay": {
+            "type": "number",
+            "description": "Usage for the current day"
+          },
+          "networkConnection": {
+            "type": "boolean",
+            "description": "Network connection status"
           }
         },
-        "x-stoplight": {
-          "id": "4xrr2s52mceig"
-        }
+        "required": ["iccId", "transactionId", "subscriptionType", "status", "countries", "creationDate", "allowance"]
       }
     },
     "securitySchemes": {
