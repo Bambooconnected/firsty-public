@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "Firsty Partners API",
     "contact": {
@@ -665,6 +665,9 @@
           "iccId": {
             "type": "string"
           },
+          "externalId": {
+            "type": "string"
+          },
           "activationCode": {
             "type": "string",
             "x-stoplight": {
@@ -692,6 +695,9 @@
         "type": "object",
         "properties": {
           "iccId": {
+            "type": "string"
+          },
+          "externalId": {
             "type": "string"
           },
           "activationCode": {
@@ -733,6 +739,9 @@
         "type": "object",
         "properties": {
           "iccId": {
+            "type": "string"
+          },
+          "externalId": {
             "type": "string"
           },
           "esimStatus": {
@@ -787,6 +796,9 @@
         "type": "object",
         "properties": {
           "iccId": {
+            "type": "string"
+          },
+          "transactionRef": {
             "type": "string"
           },
           "transactionId": {
@@ -865,6 +877,16 @@
           }
         }
       },
+      "NewUserRequest": {
+        "title": "NewUserRequest",
+        "required": [],
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "string"
+          }
+        }
+      },
       "NewSubscriptionRequest": {
         "title": "NewSubscriptionRequest",
         "required": [
@@ -888,13 +910,17 @@
           "activationType": {
             "type": "string",
             "description": "Can be of three types:\n- IMMEDIATE: Subscription is immediately active\n- AUTOMATIC: Subscription is automatically activated once the eSIM is installed\n- MANUAL: Subscription is to activated with API call"
+          },
+          "transactionRef": {
+            "type": "string"
           }
         },
         "example": {
           "subscriptionType": "Comfort Plus",
           "subscriptionCountries": "['NL']",
           "subscriptionDuration": 10,
-          "activationType": "IMMEDIATE"
+          "activationType": "IMMEDIATE",
+          "transactionRef": "1234567890"
         },
         "x-examples": {
           "Example 1": {
@@ -903,7 +929,8 @@
               "NL"
             ],
             "subscriptionDuration": 10,
-            "activationType": "IMMEDIATE"
+            "activationType": "IMMEDIATE",
+            "transactionRef": "1234567890"
           },
           "Example 2": {
             "subscriptionType": "First Class",
@@ -912,7 +939,8 @@
               "TR"
             ],
             "subscriptionDuration": 1,
-            "activationType": "AUTOMATIC"
+            "activationType": "AUTOMATIC",
+            "transactionRef": "0987654321"
           },
           "Example 3": {
             "subscriptionType": "Comfort Plus",
@@ -920,7 +948,8 @@
               "global"
             ],
             "subscriptionDuration": 30,
-            "activationType": "MANUAL"
+            "activationType": "MANUAL",
+            "transactionRef": "1122334455"
           }
         }
       },
@@ -945,7 +974,8 @@
               "subscriptionType": "",
               "subscriptionCountries": "",
               "subscriptionDuration": "",
-              "activationType": ""
+              "activationType": "",
+              "transactionRef": ""
             }
           }
         ]
