@@ -636,7 +636,9 @@
             "description": "Bearer token for authentication"
           }
         },
-        "required": ["token"]
+        "required": [
+          "token"
+        ]
       },
       "PartnerInformationResponse": {
         "title": "PartnerInformationResponse",
@@ -662,7 +664,13 @@
             "$ref": "#/components/schemas/PartnerSettings"
           }
         },
-        "required": ["name", "clientId", "code", "link", "settings"]
+        "required": [
+          "name",
+          "clientId",
+          "code",
+          "link",
+          "settings"
+        ]
       },
       "PartnerSettings": {
         "title": "PartnerSettings",
@@ -692,7 +700,14 @@
             "$ref": "#/components/schemas/EmailSettings"
           }
         },
-        "required": ["isPriceVisible", "isAddPromoVisible", "isGlobalPlanOnly", "isPartnerDynamicLinkOneTimeUse", "canSendPromotionalOneDay", "emailSettings"]
+        "required": [
+          "isPriceVisible",
+          "isAddPromoVisible",
+          "isGlobalPlanOnly",
+          "isPartnerDynamicLinkOneTimeUse",
+          "canSendPromotionalOneDay",
+          "emailSettings"
+        ]
       },
       "EmailSettings": {
         "title": "EmailSettings",
@@ -707,7 +722,10 @@
             "description": "Whether to allow domain registration"
           }
         },
-        "required": ["allowAllFromDomain", "allowDomainRegistration"]
+        "required": [
+          "allowAllFromDomain",
+          "allowDomainRegistration"
+        ]
       },
       "NewUserRequest": {
         "title": "NewUserRequest",
@@ -741,7 +759,11 @@
             "description": "QR code for activation"
           }
         },
-        "required": ["iccId", "activationCode", "qrCode"]
+        "required": [
+          "iccId",
+          "activationCode",
+          "qrCode"
+        ]
       },
       "ListUsersResponse": {
         "title": "ListUsersResponse",
@@ -758,13 +780,20 @@
             "type": "string",
             "description": "ICC ID of the user"
           },
+          "externalId": {
+            "type": "string",
+            "description": "External partner ID of the user"
+          },
           "creationDate": {
             "type": "string",
             "format": "date",
             "description": "User creation date"
           }
         },
-        "required": ["iccId", "creationDate"]
+        "required": [
+          "iccId",
+          "creationDate"
+        ]
       },
       "UserInformationResponse": {
         "title": "UserInformationResponse",
@@ -801,7 +830,14 @@
             "description": "Installation status"
           }
         },
-        "required": ["iccId", "activationCode", "qrCode", "creationDate", "esimStatus", "installationStatus"]
+        "required": [
+          "iccId",
+          "activationCode",
+          "qrCode",
+          "creationDate",
+          "esimStatus",
+          "installationStatus"
+        ]
       },
       "UserUsageResponse": {
         "title": "UserUsageResponse",
@@ -839,7 +875,14 @@
             "description": "List of countries covered"
           }
         },
-        "required": ["iccId", "esimStatus", "installationStatus", "subscriptionType", "consumptionToday", "countries"]
+        "required": [
+          "iccId",
+          "esimStatus",
+          "installationStatus",
+          "subscriptionType",
+          "consumptionToday",
+          "countries"
+        ]
       },
       "NewSubscriptionRequest": {
         "title": "NewSubscriptionRequest",
@@ -863,32 +906,48 @@
           "activationType": {
             "type": "string",
             "description": "Activation type",
-            "enum": ["IMMEDIATE", "AUTOMATIC", "MANUAL"]
+            "enum": [
+              "IMMEDIATE",
+              "AUTOMATIC",
+              "MANUAL"
+            ]
           },
           "transactionRef": {
             "type": "string",
             "description": "Transaction reference"
           }
         },
-        "required": ["subscriptionType", "subscriptionCountries", "subscriptionDuration", "activationType"],
+        "required": [
+          "subscriptionType",
+          "subscriptionCountries",
+          "subscriptionDuration",
+          "activationType"
+        ],
         "examples": [
           {
             "subscriptionType": "Comfort Plus",
-            "subscriptionCountries": ["NL"],
+            "subscriptionCountries": [
+              "NL"
+            ],
             "subscriptionDuration": 10,
             "activationType": "IMMEDIATE",
             "transactionRef": "1234567890"
           },
           {
             "subscriptionType": "First Class",
-            "subscriptionCountries": ["NL", "TR"],
+            "subscriptionCountries": [
+              "NL",
+              "TR"
+            ],
             "subscriptionDuration": 1,
             "activationType": "AUTOMATIC",
             "transactionRef": "0987654321"
           },
           {
             "subscriptionType": "Comfort Plus",
-            "subscriptionCountries": ["global"],
+            "subscriptionCountries": [
+              "global"
+            ],
             "subscriptionDuration": 30,
             "activationType": "MANUAL",
             "transactionRef": "1122334455"
@@ -957,7 +1016,15 @@
             "description": "Network connection status"
           }
         },
-        "required": ["iccId", "transactionId", "subscriptionType", "status", "countries", "creationDate", "allowance"]
+        "required": [
+          "iccId",
+          "transactionId",
+          "subscriptionType",
+          "status",
+          "countries",
+          "creationDate",
+          "allowance"
+        ]
       }
     },
     "securitySchemes": {
